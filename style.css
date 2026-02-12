@@ -1,0 +1,715 @@
+
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Monsieur+La+Doulaise&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+
+@font-face {
+  font-family: "Davida";
+  src: url("./fonts/Davida-Bold-Regular.ttf") format("truetype");
+  /* font-weight: normal;
+  font-style: normal; */
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Garamond, "Times New Roman", Times, serif;
+}
+
+
+body {
+  overflow: hidden;
+  background: #37788C;
+    min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:root{
+  --bookW: 800px;
+  --bookH: 600px;
+  --ink: #301A12;
+}
+
+.book-wrap{
+  position: relative;
+  width: var(--bookW);
+  height: var(--bookH);
+  margin: 0 auto;
+}
+
+/* shadow layer */
+.book-shadow{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;             
+  transition: opacity 180ms ease; 
+}
+
+/* CLOSED shadow (only right-side visible cover) */
+.book-wrap.is-closed .book-shadow{
+  opacity: 1;
+  width: calc(var(--bookW) / 2);
+  height: var(--bookH);
+  left: calc(var(--bookW) / 4);   /* centers the half-shadow */
+  top: 0;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.22), 0 6px 14px rgba(0,0,0,0.16);
+}
+
+/* OPEN shadow (full book) */
+.book-wrap.is-open .book-shadow{
+  opacity: 1;
+  width: var(--bookW);
+  height: var(--bookH);
+  left: 0;
+  top: 0;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.28), 0 10px 25px rgba(0,0,0,0.20);
+}
+
+/* book renders above shadow */
+.flipbook{
+  position: relative;
+  z-index: 1;
+  width: var(--bookW);
+  height: var(--bookH);
+}
+
+.book-wrap.is-closing .book-shadow{
+  transition: none !important;
+  opacity: 0 !important;
+}
+
+
+
+.flipbook::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 8px;
+  background: #301A12;
+  z-index: 9999;
+  opacity: 0;
+
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.flipbook.spine-closed::before {
+  opacity: 1;
+}
+.flipbook.spine-first-open::before{
+  opacity:1;
+}
+
+
+/* Cover container */
+.flipbook .hard.cover .cover-inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  
+  justify-content: center;   
+  gap: 10px;
+
+  text-align: left;
+  background: #DDB78B;
+}
+.cover-inner {
+  font-family: Garamond, "Times New Roman", serif;
+}
+
+
+/* Rose behind */
+.flipbook .hard.cover .cover-rose{
+  position: absolute;
+  top: -10%;
+  left: 40%;
+  width: 380px;
+  z-index: 0;
+}
+
+/* above rose */
+.flipbook .hard.cover h1,
+.flipbook .hard.cover hr,
+.flipbook .hard.cover h2{
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+/* Title */
+.flipbook .hard.cover h1{
+  font-family: "Davida" !important;
+  color: #301A12;
+  font-size: 110px;
+  line-height: 1.02;       
+}
+
+/* Divider */
+.flipbook .hard.cover hr{
+  width: 95%;
+  border: none;
+  border-top: 1px solid #301A12;
+  opacity: 0.4;
+  margin: 6px 0;            
+}
+
+/* Author */
+.flipbook .hard.cover h2{
+  font-family: "Davida" !important;
+  color: #301A12;
+  font-size: 40px;
+  line-height: 1;
+}
+.flipbook .hard.cover p{
+  font-family: Garamond, "Times New Roman", Times, serif !important;
+  color: #301A12;
+  font-size: 20px;
+}
+
+
+.cover-inner p {
+  opacity: 0.85;
+  font-family: Garamond, "Times New Roman", Times, serif;
+}
+.flipbook .page {
+  background: #F5E9D3;
+  border: 1px solid rgba(0, 0, 0, 0.11);
+}
+
+
+.page-content {
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  overflow: hidden; 
+}
+
+/* Falling sprites */
+.money, .ticket{
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+  will-change: transform, opacity;
+  transform: translate3d(0,0,0);
+  opacity: 1;
+}
+
+.money{ width: 45px; }
+.ticket{ width: 50px; }
+
+.money.fading, .ticket.fading{
+  transition: opacity 180ms linear;
+  opacity: 0;
+}
+
+/* Text page styling */
+.page-text .page-content {
+  padding-top: 70px;     /* more space at top */
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+/* Illustration page: center everything */
+.page-illustration .page-content{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+    /* push image down */
+  align-items: flex-end;
+
+  padding-bottom: 195px; /* controls how low it sits */
+}
+.page-illustration .page-image{
+  width: 28%;   
+  height: auto;
+  z-index: 2;
+}
+
+#page-3 .page-content {
+  position: relative;
+  overflow: hidden;
+}
+/* CITY IMAGE SLOT (Page 3) */
+.city-slot {
+  position: absolute;
+  width: 82%;
+  height: 40%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  pointer-events: none;
+
+    padding: 20px;   
+  box-sizing: border-box;
+}
+
+
+.city-slot img{
+  position: relative;
+  flex: 0 0 auto;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+}
+
+
+
+/* When active */
+.city-slot img.show {
+  opacity: 1 !important; /* soft overlay */
+}
+/* CITY IMAGE SLOT (Page 3) */
+#page-3 .city-slot{
+  position: absolute;
+  width: 82%;
+  height: 40%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 1;   /* behind jar but above page background */
+}
+
+/* stack images perfectly centered */
+#page-3 .city-slot img{
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* visible state */
+#page-3 .city-slot img.show{
+  opacity: 0.65;
+}
+#page-3 .page-image{
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.page-image {
+  transition: transform 0.12s ease;
+}
+
+.page-image:active {
+  transform: scale(0.97);
+}
+
+
+/* Narrow text column */
+.page-text .text {
+  max-width: 270px;      /* narrowness */
+  margin-top: 40px;     
+}
+
+
+.page-text p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+body p {
+    font-family: Garamond, "Hoefler Text", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+.title-section {
+    color: #EBA5C6;
+    font-family: "Copperplate";
+    text-align: center;
+    margin-bottom: 50px;
+}
+.title-section h1 {
+    font-family: "Davida";
+    font-size: xx-large;
+    line-height: 0px;
+}
+.title-section h3 {
+    font-size: small;
+    line-height: 20px;
+}
+.title-section h2 {
+    font-size: large;
+    line-height: 20px;
+    align-items: center;
+}
+.book-background {
+  align-items: center;
+}
+.book {
+    display: block;
+  width: 100%;
+  z-index: 0;
+  margin: 0 auto;
+}
+
+.about p {
+  font-family: Garamond, "Times New Roman", Times, serif;
+  font-size: 18px;
+}
+.body-text {
+    top: 200px;
+    z-index: 1;
+      position: absolute;
+  left: 20px; 
+}
+
+p {
+    line-height: 26px;
+    font-size: 20px;
+}
+
+.illustration {
+  position: relative;
+  z-index: 2;
+    margin-top: 75px;
+  margin-bottom: 70px;
+  margin-left: 170px;
+  width: 80px;
+}
+.money-trigger {
+  color: #237E13;
+}
+.ticket-trigger {
+  color: #EBA5C6
+}
+.bangkok-trigger {
+  color: #CD6767
+}
+.ship-trigger {
+  color: #6D8CBE;
+}
+.paris-trigger {
+  color: #28448F;
+}
+.cruise-trigger {
+  color: #6D8CBE;
+}
+
+.money-trigger,
+.ticket-trigger,
+.paris-trigger,
+.bangkok-trigger,
+.ship-trigger,
+.cruise-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+
+  cursor: pointer;
+  position: relative;
+}
+
+/* pen underline */
+.money-trigger::after,
+.ticket-trigger::after,
+.paris-trigger::after,
+.bangkok-trigger::after,
+.ship-trigger::after,
+.cruise-trigger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+
+  /* closer to text */
+  bottom: 2px;
+
+  height: 2px;
+
+  /* hidden at first */
+  transform: scaleX(0);
+  transform-origin: left;
+
+  /* ink color */
+  background: #301A12;
+
+  /* pen texture */
+  opacity: 0.95;
+  filter: blur(0.25px);
+
+  /* imperfect */
+  box-shadow: 
+    0.6px 0 rgba(48,26,18,0.35),
+   -0.4px 0 rgba(48,26,18,0.25);
+
+  pointer-events: none;
+}
+
+
+.money-trigger:hover::after,
+.ticket-trigger:hover::after,
+.paris-trigger:hover::after,
+.bangkok-trigger:hover::after,
+.ship-trigger:hover::after,
+.cruise-trigger:hover::after {
+  animation: ink-draw 320ms ease-out forwards;
+}
+
+@keyframes ink-draw{
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+
+
+@keyframes money-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(calc(var(--dx) * 0.25), calc(var(--dy) * 0.25), 0)
+      rotate(calc(var(--rot) * 0.25));
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(calc(var(--dx) * 0.6), calc(var(--dy) * 0.5), 0)
+      rotate(calc(var(--rot) * 0.5));
+    opacity: 1;
+  }
+  75% {
+    transform: translate3d(calc(var(--dx) * 0.35), calc(var(--dy) * 0.75), 0)
+      rotate(calc(var(--rot) * 0.75));
+    opacity: 1;
+  }
+  90% {
+    transform: translate3d(calc(var(--dx) * 0.12), calc(var(--dy) * 0.92), 0)
+      rotate(calc(var(--rot) * 0.95));
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--dy), 0) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+
+@keyframes ticket-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  20% {
+    transform: translate3d(calc(var(--dx) * 0.4), calc(var(--dy) * 0.2), 0)
+      rotate(calc(var(--rot) * 0.4));
+    opacity: 1;
+  }
+  40% {
+    transform: translate3d(calc(var(--dx) * -0.2), calc(var(--dy) * 0.4), 0)
+      rotate(calc(var(--rot) * -0.2));
+    opacity: 1;
+  }
+  60% {
+    transform: translate3d(calc(var(--dx) * 0.5), calc(var(--dy) * 0.6), 0)
+      rotate(calc(var(--rot) * 0.3));
+    opacity: 1;
+  }
+  80% {
+    transform: translate3d(calc(var(--dx) * -0.3), calc(var(--dy) * 0.8), 0)
+      rotate(calc(var(--rot) * -0.1));
+    opacity: 1;
+  }
+  92% {
+    transform: translate3d(calc(var(--dx) * -0.1), calc(var(--dy) * 0.92), 0)
+      rotate(calc(var(--rot) * 0.2));
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, var(--dy), 0) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+/* cruise ship */
+.cruise-ship {
+  position: absolute;
+  top: 45%; /* adjust vertical position */
+  left: -200px; /* start off screen */
+
+  width: 180px;
+  height: auto;
+
+  z-index: 1;
+  pointer-events: none;
+
+  animation: cruise-across 4.5s ease-in-out forwards;
+}
+
+/* Smooth horizontal travel */
+@keyframes cruise-across {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(1200px);
+    opacity: 0;
+  }
+}
+
+
+
+.money { position: absolute; width: 28px; pointer-events: none; z-index: 50; }
+.ticket { position: absolute; width: 80px; pointer-events: none; z-index: 50; }
+
+/* Jar wrapper  */
+.jar-wrap{
+  position: relative;
+  display: inline-block;
+  width: 28%;
+}
+
+/* Jar fills wrapper */
+.jar-wrap img#belljar{
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 3;
+}
+
+
+/* Spiral effect behind the bell jar */
+.spiral{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%) scale(0.15) rotate(0deg);
+  transform-origin: center;
+
+  width: 120%;  
+  height: auto;
+
+  z-index: 2;
+  pointer-events: none;
+
+  opacity: 0;
+  animation: spiral-grow 5.5s ease-in forwards;
+}
+
+
+@keyframes spiral-grow {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.15) rotate(0deg);
+  }
+
+  10% {
+    opacity: 0.7; 
+  }
+
+  85% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(8) rotate(900deg);
+  }
+}
+
+
+#page-3 .city-slot{
+  z-index: 0;
+}
+
+#page-3 .jar-wrap{
+  z-index: 2;
+}
+
+#page-3 #belljar{
+  z-index: 3;
+}
+
+#page-3 .spiral{
+  z-index: 2;
+}
+
+
+.flipbook .hard.cover .cover-inner,
+.flipbook .hard.cover .cover-inner p {
+  font-family: "EB Garamond", Garamond, "Times New Roman", serif !important;
+  font-size: 20px;
+}
+
+/* FORCE tiny credits (matches your actual HTML: <div class="text credits">) */
+.flipbook .page .text.credits,
+.flipbook .page .text.credits p,
+.flipbook .page .text.credits a,
+.flipbook .page .text.credits h2,
+.flipbook .page .text.credits b,
+.flipbook .page .text.credits i {
+  font-size: 10px !important;
+  line-height: 1.35 !important;
+}
+
+/* Slightly bigger header */
+.flipbook .page .text.credits h2 {
+  font-size: 11px !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Make links even quieter */
+.flipbook .page .text.credits a {
+  font-size: 9px !important;
+  text-decoration: none;
+  opacity: 0.8;
+}
+.flipbook .page .text.credits a:hover {
+  text-decoration: underline;
+}
+
+/* Override your global p sizing on just this block */
+.flipbook .page .text.credits p {
+  margin-bottom: 8px;
+}
+
+
+
+
+

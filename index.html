@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>The Bell Jar</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap" rel="stylesheet">
+
   </head>
 
   <body>
@@ -76,9 +80,52 @@
 <!-- Page 4 -->
       <div class="page page-text">
         <div class="page-content">
-          <div class="text">
-            <p>© 1971 by HARPERS and ROW, Publishing Inc.</p>
-          </div>
+          <div class="text credits">
+      <h2>Credits &amp Citations</h2>
+
+      <p><b>Primary Text</b><br>
+        <i>The Bell Jar</i> by Sylvia Plath.<br>
+        Published by Harper &amp Row.
+      </p>
+
+      <p><b>Flipbook / book effect</b><br>
+        Adapted from <i>Hank-D-Tank</i> (GitHub repository).<br>
+        <a href="https://github.com/Hank-D-Tank"
+           target="_blank"
+           rel="noopener noreferrer">
+          https://github.com/Hank-D-Tank
+        </a>
+      </p>
+
+      <p><b>Rose PNG</b><br>
+        “Studio photo of a dried rose on Valentine’s Day.”<br>
+        <a href="https://pngtree.com/freepng/studio-photo-of-a-dried-rose-on-valentine-s-day_14470975.html?sol=downref&id=bef"
+           target="_blank"
+           rel="noopener noreferrer">
+          pngtree.com
+        </a>
+      </p>
+
+      <p><b>Sound effect</b><br>
+        Sound Effect by
+        <a href="https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=101000"
+           target="_blank"
+           rel="noopener noreferrer">
+          freesound_community
+        </a>
+        from
+        <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=101000"
+           target="_blank"
+           rel="noopener noreferrer">
+          Pixabay
+        </a>.
+      </p>
+
+      <p class="credits-note">
+        All third-party assets remain the property of their respective creators and
+        are used here for educational and non-commercial purposes.
+      </p>
+    </div>
         </div>
       </div>
 
@@ -90,13 +137,11 @@
 <!-- Back cover -->
       <div class="hard cover">
         <div class="cover-inner">
-          <div class="about">
-            <p><b>About the Author</b><br>
-              Sylvia Plath was born in 1932 in Massachusetts. Her books include the poetry
+            <p><b>About the Author</b><br></p>
+              <p>Sylvia Plath was born in 1932 in Massachusetts. Her books include the poetry
              collections <i>The Colossus, Crossing the Water, Winter Trees,
                Ariel, </i>and <i>The Collected Poems,</i> which won the Pulitzer Prize.
               She was married to the poet Ted Hughes, and died in London in 1963.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -155,16 +200,16 @@
 
         when: {
           turning: function (event, page) {
-            // If we're STARTING to close, hide shadow immediately
+
             if (isClosedPage(page)) {
-              $wrap.addClass("is-closing");     // instantly kills shadow
+              $wrap.addClass("is-closing");     
               $wrap.addClass("is-closed").removeClass("is-open");
             }
-            // If we're opening, do nothing here (prevents early open shadow)
+
           },
 
           turned: function (event, page) {
-            // After the animation, set the correct final shadow state
+            
             applyFinalState(page);
           }
         }
