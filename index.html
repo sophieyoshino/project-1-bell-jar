@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>The Bell Jar</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+  <div class="book-wrap">
+    <div class="book-shadow"></div>
+    <div class="flipbook closed">
+      <!-- front cover -->
+      <div class="hard cover">
+        <div class="cover-inner">
+          <img class="cover-rose" src="longstemdyingrosev2.png" alt="dying rose">
+          <h1>The<br>Bell<br>Jar</h1>
+          <hr>
+          <h2>Sylvia Plath</h2>
+      </div>
+      </div>
+
+<!-- inside front cover -->
+      <div class="hard cover">
+        <div class="cover-inner"></div>
+      </div>
+
+<!-- Page 1 (right) (dedication)-->
+      <div class="page page-text">
+        <div class="page-content">
+          <div class="about">
+            <p><b>The Bell Jar</b> is written from the perspective of Esther Greenwood, a college student navigating
+              her role as a woman in 1950s society. Her brilliance grants her opportunities, such
+                as funding from a sponsor, Mrs. Guinea. However, as the novel progresses,
+                she spirals deeper into her depression.
+              The following is the excerpt of the book that details the titular metaphor.</p>
+           </div>
+        </div>
+      </div>
+
+<!-- Page 2 -->
+      <div class="page page-text">
+        <div class="page-content">
+          <div class="text">
+            <p>I knew I should be grateful to <button class="money-trigger" type="button">Mrs. Guinea,</button>
+                only I couldn’t feel a thing.
+                If <button class="money-trigger" type="button">Mrs. Guinea</button> had given me a <button class="ticket-trigger" type="button">ticket to Europe,</button>
+                or a <button class="cruise-trigger" type="button">
+  round-the-world cruise
+</button>
+, it wouldn't have have made one scrap of a difference
+                 to me, because wherever I sat – on the on the <button class="ship-trigger" type="button">deck of a ship</button>
+
+                 or at a street cafe in <button class="paris-trigger" type="button">Paris</button> or <button class="bangkok-trigger" type="button">Bangkok</button> – I would be
+                 sitting under the same glass bell jar, stewing in
+                 my own sour air.</p>
+          </div>
+        </div>
+      </div>
+
+<!-- Page 3 -->
+      <div class="page page-illustration" id="page-3">
+          <div class="page-content">
+            <div class="city-slot" id="city-slot">
+              <img data-city="paris" src="parisv4.png" alt="">
+              <img data-city="bangkok" src="bangkok7.png" alt="">
+              <img data-city="ship" src="ship.jpg" alt="">
+            </div>
+            <div class="jar-wrap">
+            <img class="page-image" id="belljar" src="belljarv3.png" alt="woman sitting in a glass bell jar">
+          </div>
+          </div>
+        </div>
+
+<!-- Page 4 -->
+      <div class="page page-text">
+        <div class="page-content">
+          <div class="text">
+            <p>© 1971 by HARPERS and ROW, Publishing Inc.</p>
+          </div>
+        </div>
+      </div>
+
+<!-- inside back cover -->
+      <div class="hard cover">
+        <div class="cover-inner"></div>
+      </div>
+
+<!-- Back cover -->
+      <div class="hard cover">
+        <div class="cover-inner">
+          <div class="about">
+            <p><b>About the Author</b><br>
+              Sylvia Plath was born in 1932 in Massachusetts. Her books include the poetry
+             collections <i>The Colossus, Crossing the Water, Winter Trees,
+               Ariel, </i>and <i>The Collected Poems,</i> which won the Pulitzer Prize.
+              She was married to the poet Ted Hughes, and died in London in 1963.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- scripts -->
+      <audio id="tap-audio" src="glass_tap.mp3" preload="auto"></audio>
+      <!-- <script src="fallEngine.js"></script> -->
+      <script src="money.js"></script>
+      <script src="ticket.js"></script>
+      <!-- <script src="bangkok.js"></script>
+      <script src="paris.js"></script> -->
+      <script src="jquery.js"></script>
+      <script src="turn.js"></script>
+      <script src="citySlot.js"></script>
+      <script src="cruise.js"></script>
+      <script src="spiral.js"></script>
+
+
+      <script>
+        window.addEventListener("load", () => {
+          const audio = document.getElementById("tap-audio");
+
+          document.addEventListener("click", (e) => {
+            const jar = e.target.closest("#belljar"); // or "#page-3 .page-image"
+            if (!jar || !audio) return;
+
+            audio.currentTime = 0;
+            audio.play().catch(() => {});
+          });
+        });
+      </script>
+
+
+
+<script>
+    window.addEventListener("load", () => {
+      const $wrap = $(".book-wrap");
+      const $book = $(".flipbook");
+
+      function isClosedPage(page){
+        const total = $book.turn("pages");
+        return page === 1 || page === total;
+      }
+
+      function applyFinalState(page){
+        const closed = isClosedPage(page);
+        $wrap.toggleClass("is-closed", closed);
+        $wrap.toggleClass("is-open", !closed);
+        $wrap.removeClass("is-closing");
+      }
+
+      $book.turn({
+        autoCenter: true,
+        display: "double",
+        page: 1,
+
+        when: {
+          turning: function (event, page) {
+            // If we're STARTING to close, hide shadow immediately
+            if (isClosedPage(page)) {
+              $wrap.addClass("is-closing");     // instantly kills shadow
+              $wrap.addClass("is-closed").removeClass("is-open");
+            }
+            // If we're opening, do nothing here (prevents early open shadow)
+          },
+
+          turned: function (event, page) {
+            // After the animation, set the correct final shadow state
+            applyFinalState(page);
+          }
+        }
+      });
+
+      // initial state
+      $wrap.addClass("is-closed").removeClass("is-open is-closing");
+    });
+</script>
+
+
+
+    </body>
+  </html>
