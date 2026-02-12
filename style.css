@@ -675,7 +675,7 @@ p {
   font-size: 20px;
 }
 
-/* FORCE tiny credits (matches your actual HTML: <div class="text credits">) */
+
 .flipbook .page .text.credits,
 .flipbook .page .text.credits p,
 .flipbook .page .text.credits a,
@@ -694,7 +694,7 @@ p {
   margin-bottom: 10px;
 }
 
-/* Make links even quieter */
+
 .flipbook .page .text.credits a {
   font-size: 9px !important;
   text-decoration: none;
@@ -704,7 +704,7 @@ p {
   text-decoration: underline;
 }
 
-/* Override your global p sizing on just this block */
+
 .flipbook .page .text.credits p {
   margin-bottom: 8px;
 }
