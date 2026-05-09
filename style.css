@@ -456,6 +456,19 @@ p {
   position: relative;
 }
 
+.sour-air-trigger {
+  color: #6f7f4f;
+  cursor: pointer;
+  display: inline-block;
+  transition: filter 0.8s ease, color 0.8s ease, letter-spacing 0.8s ease;
+}
+
+.sour-air-trigger:hover {
+  filter: blur(1.1px);
+  color: #3f4f2d;
+  letter-spacing: 1px;
+}
+
 /* pen underline */
 .money-trigger::after,
 .ticket-trigger::after,
@@ -733,6 +746,23 @@ p {
   margin-bottom: 8px;
 }
 
+body.sour-air-mode {
+  background: #8f9b73;
+  transition: background 1.2s ease;
+}
+
+body.sour-air-mode .flipbook .page {
+  background: #dbe1c7;
+  transition: background 1.2s ease, filter 1.2s ease;
+}
+
+body.sour-air-mode .page-text p {
+  filter: blur(0.45px);
+}
+
+body.sour-air-mode .sour-air-trigger {
+  filter: blur(1.4px);
+}
 
 
 

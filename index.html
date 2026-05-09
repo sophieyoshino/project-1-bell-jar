@@ -55,7 +55,7 @@
 
                  or at a street cafe in <button class="paris-trigger" type="button">Paris</button> or <button class="bangkok-trigger" type="button">Bangkok</button>—I would be
                  sitting under the same glass bell jar, stewing in
-                 my own sour air.</p>
+                 my own <span class="sour-air-trigger">sour air.</span></p>
           </div>
         </div>
       </div>
@@ -217,6 +217,21 @@
     });
 </script>
 
+<script>
+  window.addEventListener("load", () => {
+    const sourAir = document.querySelector(".sour-air-trigger");
+
+    if (!sourAir) return;
+
+    sourAir.addEventListener("mouseenter", () => {
+      document.body.classList.add("sour-air-mode");
+    });
+
+    sourAir.addEventListener("mouseleave", () => {
+      document.body.classList.remove("sour-air-mode");
+    });
+  });
+</script>
 
 
     </body>
