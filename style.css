@@ -17,6 +17,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+p,
+.book-text,
+.chapter-title,
+.quote {
   font-family: "EB Garamond", serif;
 }
 
