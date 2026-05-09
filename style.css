@@ -505,13 +505,15 @@ p {
   pointer-events: none;
 }
 
+.ticket-trigger:hover::after {
+  transform: translateY(-4px);
+  letter-spacing: 1px;
+}
 
 .money-trigger:hover::after,
-.ticket-trigger:hover::after,
 .paris-trigger:hover::after,
 .bangkok-trigger:hover::after,
-.ship-trigger:hover::after,
-.cruise-trigger:hover::after {
+.ship-trigger:hover::after {
   animation: ink-draw 320ms ease-out forwards;
 }
 
