@@ -764,6 +764,44 @@ body.sour-air-mode .sour-air-trigger {
   filter: blur(1.4px);
 }
 
+.cruise-word {
+  display: inline-block;
+}
 
+.cruise-word.sail-away {
+  animation: word-cruise-loop 2.8s ease-in-out forwards;
+}
+
+@keyframes word-cruise-loop {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  38% {
+    transform: translateX(260px);
+    opacity: 1;
+  }
+
+  45% {
+    transform: translateX(290px);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(-220px);
+    opacity: 0;
+  }
+
+  58% {
+    transform: translateX(-190px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 
