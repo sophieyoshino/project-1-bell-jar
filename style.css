@@ -40,6 +40,17 @@ body {
   --ink: #301A12;
 }
 
+body {
+  font-family: "EB Garamond", serif;
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+p {
+  font-weight: 400;
+}
+
 .book-wrap{
   position: relative;
   width: var(--bookW);
