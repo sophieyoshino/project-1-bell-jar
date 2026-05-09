@@ -505,7 +505,7 @@ p {
   pointer-events: none;
 }
 
-.ticket-trigger:hover::after {
+.ticket-trigger:hover {
   transform: translateY(-4px);
   letter-spacing: 1px;
 }
