@@ -830,39 +830,47 @@ body.sour-air-mode .sour-air-trigger {
   display: inline-block;
   cursor: pointer;
 }
-.ship-trigger .word-gap {
+
+.ship-trigger {
+  color: #6D8CBE;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+
   display: inline-block;
-  width: 0.25em;
+
+  transition:
+    transform 1.8s ease-in-out,
+    text-shadow 1.8s ease-in-out;
 }
 
-.ship-trigger span {
-  display: inline-block;
-  transition: transform 0.3s ease;
+.ship-trigger:hover {
+  animation: ship-drift 2.6s ease-in-out infinite;
+
+  text-shadow:
+    1px 1px 0 rgba(255,255,255,0.2);
 }
 
-.ship-trigger:hover span {
-  animation: ocean-wave 1.8s ease-in-out infinite;
-}
+@keyframes ship-drift {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
 
-/* stagger the letters */
-.ship-trigger span:nth-child(1)  { animation-delay: 0s; }
-.ship-trigger span:nth-child(2)  { animation-delay: 0.05s; }
-.ship-trigger span:nth-child(3)  { animation-delay: 0.1s; }
-.ship-trigger span:nth-child(4)  { animation-delay: 0.15s; }
-.ship-trigger span:nth-child(5)  { animation-delay: 0.2s; }
-.ship-trigger span:nth-child(6)  { animation-delay: 0.25s; }
-.ship-trigger span:nth-child(7)  { animation-delay: 0.3s; }
-.ship-trigger span:nth-child(8)  { animation-delay: 0.35s; }
-.ship-trigger span:nth-child(9)  { animation-delay: 0.4s; }
-.ship-trigger span:nth-child(10) { animation-delay: 0.45s; }
-.ship-trigger span:nth-child(11) { animation-delay: 0.5s; }
-.ship-trigger span:nth-child(12) { animation-delay: 0.55s; }
-.ship-trigger span:nth-child(13) { animation-delay: 0.6s; }
+  25% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
 
-@keyframes ocean-wave {
-  0%   { transform: translateY(0px); }
-  25%  { transform: translateY(-3px); }
-  50%  { transform: translateY(1px); }
-  75%  { transform: translateY(3px); }
-  100% { transform: translateY(0px); }
+  50% {
+    transform: translateY(1px) rotate(0.6deg);
+  }
+
+  75% {
+    transform: translateY(3px) rotate(1deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
 }
