@@ -424,6 +424,13 @@ p {
 }
 .money-trigger {
   color: #237E13;
+    transition:
+    letter-spacing 0.4s ease,
+    filter 0.4s ease,
+    color 0.4s ease,
+    transform 0.4s ease;
+
+  display: inline-block;
 }
 .ticket-trigger {
   color: #EBA5C6
@@ -455,6 +462,14 @@ p {
   cursor: pointer;
   position: relative;
 }
+.money-trigger:hover {
+  letter-spacing: -1px;
+  color: #1e5d12;
+
+  filter: contrast(1.15);
+
+  transform: scaleY(0.96);
+}
 
 .sour-air-trigger {
   color: #6f7f4f;
@@ -470,7 +485,6 @@ p {
 }
 
 /* pen underline */
-.money-trigger::after,
 .ticket-trigger::after,
 .paris-trigger::after,
 .bangkok-trigger::after,
