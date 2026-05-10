@@ -478,11 +478,6 @@ body.paris-mode {
   transition: background 1.2s ease;
 }
 
-body.paris-mode .flipbook .page {
-  background: #e7edf5;
-  transition: background 1.2s ease;
-}
-
 /* BANGKOK */
 
 body.bangkok-mode {
@@ -490,10 +485,6 @@ body.bangkok-mode {
   transition: background 1.2s ease;
 }
 
-body.bangkok-mode .flipbook .page {
-  background: #f3ddd2;
-  transition: background 1.2s ease;
-}
 
 .sour-air-trigger {
   color: #6f7f4f;
