@@ -830,6 +830,10 @@ body.sour-air-mode .sour-air-trigger {
   display: inline-block;
   cursor: pointer;
 }
+.ship-trigger .word-gap {
+  display: inline-block;
+  width: 0.25em;
+}
 
 .ship-trigger span {
   display: inline-block;
