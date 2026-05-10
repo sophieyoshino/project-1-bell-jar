@@ -239,23 +239,74 @@ window.addEventListener("load", () => {
   const paris = document.querySelector(".paris-trigger");
   const bangkok = document.querySelector(".bangkok-trigger");
 
+  let lockedMode = null;
+
+  function clearModes() {
+    document.body.classList.remove(
+      "paris-mode",
+      "bangkok-mode"
+    );
+  }
+
+  // PARIS
+
   if (paris) {
+
     paris.addEventListener("mouseenter", () => {
-      document.body.classList.add("paris-mode");
+      if (!lockedMode) {
+        clearModes();
+        document.body.classList.add("paris-mode");
+      }
     });
 
     paris.addEventListener("mouseleave", () => {
-      document.body.classList.remove("paris-mode");
+      if (!lockedMode) {
+        clearModes();
+      }
+    });
+
+    paris.addEventListener("click", () => {
+
+      if (lockedMode === "paris") {
+        lockedMode = null;
+        clearModes();
+      } else {
+        lockedMode = "paris";
+        clearModes();
+        document.body.classList.add("paris-mode");
+      }
+
     });
   }
 
+  // BANGKOK
+
   if (bangkok) {
+
     bangkok.addEventListener("mouseenter", () => {
-      document.body.classList.add("bangkok-mode");
+      if (!lockedMode) {
+        clearModes();
+        document.body.classList.add("bangkok-mode");
+      }
     });
 
     bangkok.addEventListener("mouseleave", () => {
-      document.body.classList.remove("bangkok-mode");
+      if (!lockedMode) {
+        clearModes();
+      }
+    });
+
+    bangkok.addEventListener("click", () => {
+
+      if (lockedMode === "bangkok") {
+        lockedMode = null;
+        clearModes();
+      } else {
+        lockedMode = "bangkok";
+        clearModes();
+        document.body.classList.add("bangkok-mode");
+      }
+
     });
   }
 
