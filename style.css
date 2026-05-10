@@ -532,16 +532,13 @@ body.bangkok-mode {
 }
 
 .ticket-trigger:hover {
-  transform: translateY(2px);
+  transform: translateY(-3px);
 
-  color: #b45b7d;
+  opacity: 0.72;
 
-  text-shadow:
-    inset 0 1px 1px rgba(0,0,0,0.18);
+  letter-spacing: 0.04em;
 
-  filter: contrast(1.05);
-
-  letter-spacing: 0.3px;
+  color: #d58ca8;
 }
 
 .money-trigger:hover::after {
