@@ -55,7 +55,7 @@
   deck of a ship
 </button>
                  or at a street cafe in <button class="paris-trigger" type="button">Paris</button> or <button class="bangkok-trigger" type="button">Bangkok</button>—I would be
-                 sitting under the same glass bell jar, stewing in
+                 sitting under the same same <span class="belljar-trigger">glass bell jar</span>, stewing in
                  my own <span class="sour-air-trigger">sour air.</span></p>
           </div>
         </div>
@@ -304,5 +304,24 @@ window.addEventListener("load", () => {
 
 });
 </script>
+
+<script>
+window.addEventListener("load", () => {
+
+  const belljar = document.querySelector(".belljar-trigger");
+
+  if (!belljar) return;
+
+  belljar.addEventListener("mouseenter", () => {
+    document.body.classList.add("belljar-mode");
+  });
+
+  belljar.addEventListener("mouseleave", () => {
+    document.body.classList.remove("belljar-mode");
+  });
+
+});
+</script>
+
     </body>
   </html>

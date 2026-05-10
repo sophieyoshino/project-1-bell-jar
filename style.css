@@ -471,6 +471,61 @@ p {
   transform: scaleY(0.96);
 }
 
+.belljar-trigger {
+  color: #5d5d5d;
+  cursor: pointer;
+  transition: color 1.2s ease;
+}
+
+.belljar-trigger:hover {
+  color: #3f3f3f;
+}
+body.belljar-mode {
+  transition:
+    background 2s ease,
+    filter 2s ease,
+    transform 2s ease;
+}
+
+/* subtle compression of the whole scene */
+body.belljar-mode .book-wrap {
+  transform: scale(0.985);
+  transition: transform 2.2s ease;
+}
+
+/* flatten emotional contrast */
+body.belljar-mode .flipbook {
+  filter:
+    contrast(0.92)
+    saturate(0.88)
+    brightness(0.96);
+
+  transition: filter 2.2s ease;
+}
+
+/* slight darkening around the edges */
+body.belljar-mode::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,0,0,0) 45%,
+      rgba(0,0,0,0.18) 100%
+    );
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  transition: opacity 2s ease;
+
+  z-index: 999;
+}
+
 /* PARIS */
 
 body.paris-mode {
