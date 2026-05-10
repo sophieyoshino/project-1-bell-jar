@@ -881,7 +881,7 @@ body.sour-air-mode .sour-air-trigger {
 
 .ticket-trigger {
   display: inline-block;
-  color: #9E4F6D
+  color: #9E4F6D;
 
   transition:
     transform 2.8s ease,
