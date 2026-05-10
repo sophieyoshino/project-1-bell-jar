@@ -471,6 +471,30 @@ p {
   transform: scaleY(0.96);
 }
 
+/* PARIS */
+
+body.paris-mode {
+  background: #7d93b5;
+  transition: background 1.2s ease;
+}
+
+body.paris-mode .flipbook .page {
+  background: #e7edf5;
+  transition: background 1.2s ease;
+}
+
+/* BANGKOK */
+
+body.bangkok-mode {
+  background: #c9826b;
+  transition: background 1.2s ease;
+}
+
+body.bangkok-mode .flipbook .page {
+  background: #f3ddd2;
+  transition: background 1.2s ease;
+}
+
 .sour-air-trigger {
   color: #6f7f4f;
   cursor: pointer;
@@ -486,8 +510,6 @@ p {
 
 /* pen underline */
 .ticket-trigger::after,
-.paris-trigger::after,
-.bangkok-trigger::after,
 .cruise-trigger::after {
   content: "";
   position: absolute;
@@ -531,9 +553,7 @@ p {
   letter-spacing: 0.3px;
 }
 
-.money-trigger:hover::after,
-.paris-trigger:hover::after,
-.bangkok-trigger:hover::after {
+.money-trigger:hover::after {
   animation: ink-draw 320ms ease-out forwards;
 }
 
