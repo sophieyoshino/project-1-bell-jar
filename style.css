@@ -531,16 +531,6 @@ body.bangkok-mode {
   pointer-events: none;
 }
 
-.ticket-trigger:hover {
-  transform: translateY(-3px);
-
-  opacity: 0.72;
-
-  letter-spacing: 0.04em;
-
-  color: #d58ca8;
-}
-
 .money-trigger:hover::after {
   animation: ink-draw 320ms ease-out forwards;
 }
@@ -887,4 +877,33 @@ body.sour-air-mode .sour-air-trigger {
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+}
+
+.ticket-trigger {
+  display: inline-block;
+  color: #EBA5C6;
+
+  transition:
+    transform 2.8s ease,
+    opacity 2.8s ease,
+    letter-spacing 2.8s ease,
+    color 2.8s ease,
+    filter 2.8s ease;
+}
+
+/* remove underline */
+.ticket-trigger::after {
+  display: none;
+}
+
+.ticket-trigger:hover {
+  transform: translateY(-6px);
+
+  opacity: 0.55;
+
+  letter-spacing: 0.08em;
+
+  color: #d9a8bc;
+
+  filter: blur(0.2px);
 }
