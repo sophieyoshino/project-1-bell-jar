@@ -799,9 +799,8 @@ body.sour-air-mode .sour-air-trigger {
 }
 
 .cruise-trigger:hover {
-  animation: cruise-glide 3.5s ease-in-out infinite;
-
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
+  opacity: 0.78;
 }
 
 @keyframes cruise-glide {
