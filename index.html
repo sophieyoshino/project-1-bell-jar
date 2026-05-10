@@ -241,70 +241,62 @@ window.addEventListener("load", () => {
 
   let lockedMode = null;
 
-  function clearModes() {
+  function applyMode(mode) {
     document.body.classList.remove(
       "paris-mode",
       "bangkok-mode"
     );
+
+    if (mode) {
+      document.body.classList.add(`${mode}-mode`);
+    }
   }
 
-  // PARIS
+  // ---------- PARIS ----------
 
   if (paris) {
 
     paris.addEventListener("mouseenter", () => {
-      if (!lockedMode) {
-        clearModes();
-        document.body.classList.add("paris-mode");
-      }
+      applyMode("paris");
     });
 
     paris.addEventListener("mouseleave", () => {
-      if (!lockedMode) {
-        clearModes();
-      }
+      applyMode(lockedMode);
     });
 
     paris.addEventListener("click", () => {
 
       if (lockedMode === "paris") {
         lockedMode = null;
-        clearModes();
+        applyMode(null);
       } else {
         lockedMode = "paris";
-        clearModes();
-        document.body.classList.add("paris-mode");
+        applyMode("paris");
       }
 
     });
   }
 
-  // BANGKOK
+  // ---------- BANGKOK ----------
 
   if (bangkok) {
 
     bangkok.addEventListener("mouseenter", () => {
-      if (!lockedMode) {
-        clearModes();
-        document.body.classList.add("bangkok-mode");
-      }
+      applyMode("bangkok");
     });
 
     bangkok.addEventListener("mouseleave", () => {
-      if (!lockedMode) {
-        clearModes();
-      }
+      applyMode(lockedMode);
     });
 
     bangkok.addEventListener("click", () => {
 
       if (lockedMode === "bangkok") {
         lockedMode = null;
-        clearModes();
+        applyMode(null);
       } else {
         lockedMode = "bangkok";
-        clearModes();
-        document.body.classList.add("bangkok-mode");
+        applyMode("bangkok");
       }
 
     });
