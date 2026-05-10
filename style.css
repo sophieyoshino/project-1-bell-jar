@@ -488,7 +488,6 @@ p {
 .ticket-trigger::after,
 .paris-trigger::after,
 .bangkok-trigger::after,
-.ship-trigger::after,
 .cruise-trigger::after {
   content: "";
   position: absolute;
@@ -534,8 +533,7 @@ p {
 
 .money-trigger:hover::after,
 .paris-trigger:hover::after,
-.bangkok-trigger:hover::after,
-.ship-trigger:hover::after {
+.bangkok-trigger:hover::after {
   animation: ink-draw 320ms ease-out forwards;
 }
 
@@ -828,4 +826,39 @@ body.sour-air-mode .sour-air-trigger {
   }
 }
 
+.ship-trigger {
+  display: inline-block;
+  cursor: pointer;
+}
 
+.ship-trigger span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.ship-trigger:hover span {
+  animation: ocean-wave 1.8s ease-in-out infinite;
+}
+
+/* stagger the letters */
+.ship-trigger span:nth-child(1)  { animation-delay: 0s; }
+.ship-trigger span:nth-child(2)  { animation-delay: 0.05s; }
+.ship-trigger span:nth-child(3)  { animation-delay: 0.1s; }
+.ship-trigger span:nth-child(4)  { animation-delay: 0.15s; }
+.ship-trigger span:nth-child(5)  { animation-delay: 0.2s; }
+.ship-trigger span:nth-child(6)  { animation-delay: 0.25s; }
+.ship-trigger span:nth-child(7)  { animation-delay: 0.3s; }
+.ship-trigger span:nth-child(8)  { animation-delay: 0.35s; }
+.ship-trigger span:nth-child(9)  { animation-delay: 0.4s; }
+.ship-trigger span:nth-child(10) { animation-delay: 0.45s; }
+.ship-trigger span:nth-child(11) { animation-delay: 0.5s; }
+.ship-trigger span:nth-child(12) { animation-delay: 0.55s; }
+.ship-trigger span:nth-child(13) { animation-delay: 0.6s; }
+
+@keyframes ocean-wave {
+  0%   { transform: translateY(0px); }
+  25%  { transform: translateY(-3px); }
+  50%  { transform: translateY(1px); }
+  75%  { transform: translateY(3px); }
+  100% { transform: translateY(0px); }
+}
